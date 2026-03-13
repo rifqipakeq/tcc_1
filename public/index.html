@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Simple Notes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Catatan Digital</h1>
+        
+        <form id="note-form">
+            <input type="hidden" id="note-id">
+            <input type="text" id="judul" placeholder="Judul Catatan" required>
+            <textarea id="isi" placeholder="Tulis isi catatan di sini..." required></textarea>
+            <button type="submit" id="submit-btn">Simpan Catatan</button>
+            <button type="button" id="cancel-btn" style="display:none;">Batal</button>
+        </form>
+
+        <hr>
+
+        <div id="notes-list">
+            </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
