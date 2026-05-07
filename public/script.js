@@ -1,4 +1,4 @@
-const API_URL = 'https://be-rest-rifqi-325409493725.us-central1.run.app/';
+const API_URL = 'https://be-rest-rifqi-325409493725.us-central1.run.app/api/notes';
 const noteForm = document.getElementById('note-form');
 const notesList = document.getElementById('notes-list');
 const submitBtn = document.getElementById('submit-btn');
