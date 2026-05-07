@@ -11,18 +11,17 @@ app.use(express.static('public'));
 
 // Koneksi Database
 const db = mysql.createConnection({
-    host: '34.135.19.199',
+    host: '34.172.113.167',
     user: 'admin',      
-    password: '123230119',      
-    database: 'notes_db'
+    password: 'mypassword',      
+    database: 'notes_123230119'
 });
 
 db.connect(err => {
     if (err) throw err;
-    console.log('MySQL Connected...');
+    console.log('MySQL Connected');
 });
 
-// --- API ROUTES ---
 
 // 1. Ambil semua catatan
 app.get('/api/notes', (req, res) => {

@@ -1,5 +1,5 @@
 runtime: nodejs20
-# service: frontend-rifqi
+service: frontend-rifqi
 
 # Tambahkan ini supaya hemat (untuk testing)
 automatic_scaling:
