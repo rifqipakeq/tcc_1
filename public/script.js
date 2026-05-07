@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/notes';
+const API_URL = 'https://frontend-rifqi-dot-refined-cortex-442704-m0.et.r.appspot.com/';
 const noteForm = document.getElementById('note-form');
 const notesList = document.getElementById('notes-list');
 const submitBtn = document.getElementById('submit-btn');
