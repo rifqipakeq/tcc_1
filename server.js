@@ -8,7 +8,16 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); 
+app.use(express.static('public'));
+
+// Basic request logging for easier debugging
+app.use((req, res, next) => {
+    console.log(new Date().toISOString(), req.method, req.originalUrl);
+    if (req.method === 'POST' || req.method === 'PUT') {
+        console.log('Payload:', req.body);
+    }
+    next();
+});
 
 // Koneksi Database
 const db = mysql.createConnection({
@@ -19,7 +28,10 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-    if (err) throw err;
+    if (err) {
+        console.error('MySQL connection error:', err);
+        return; // keep process alive so Cloud Run can show logs; handle errors per-request
+    }
     console.log('MySQL Connected');
 });
 
@@ -35,10 +47,16 @@ app.get('/api/notes', (req, res) => {
 
 // 2. Tambah catatan baru
 app.post('/api/notes', (req, res) => {
-    const { judul, isi } = req.body;
+    const { judul, isi } = req.body || {};
+    if (!judul || !isi) {
+        return res.status(400).json({ error: 'judul dan isi wajib diisi ' });
+    }
     const sql = 'INSERT INTO notes (judul, isi) VALUES (?, ?)';
     db.query(sql, [judul, isi], (err, result) => {
-        if (err) return res.status(500).send(err);
+        if (err) {
+            console.error('DB insert error:', err);
+            return res.status(500).json({ error: 'Database error', details: err.message });
+        }
         res.json({ id: result.insertId, judul, isi });
     });
 });
